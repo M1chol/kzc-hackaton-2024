@@ -6,6 +6,7 @@ DB_P_O_I_LINK = r'backend\databases\pointsofintrest.json'
 DB_UP_LINK = r"backend\databases\userfav.json"
 
 #TODO Error handling
+#TODO powróć x, y
 class ElementType():
     def __init__(self) -> None:
         pass
@@ -56,8 +57,8 @@ class DBPostHandling():
 class POIElement(ElementType):
     def __init__(self) -> None:
         self.ID = 0
-        self.lat = float
-        self.lng = float
+        self.x = float
+        self.y = float
         self.name = ''
         self.iconID = 0
         self.posts = []
@@ -67,7 +68,7 @@ class DBPOIHandling():
 
     def _addEle(self, Element: POIElement) -> int:
         lastID = self.__lastID()
-        self.db.insert({'ID': lastID+1, 'lat': Element.lat, 'lng': Element.lng, 
+        self.db.insert({'ID': lastID+1, 'x': Element.x, 'y': Element.y, 
                         'name': Element.name, 'iconID': Element.iconID, 'posts': []})
         return lastID
 
