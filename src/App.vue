@@ -17,10 +17,27 @@ export default {
 </script>
 
 <style>
+.darkgreen {
+    background-color: #627254;
+}
+
+.lightgreen {
+    background-color: #76885B;
+}
+
+.gray {
+    background-color: #DDDDDD;
+}
+
+.lightgray {
+    background-color: #EEEEEE;
+}
+
 * {
   margin: 0;
 }
 #app {
   height: 100vh;
 }
+
 </style>
