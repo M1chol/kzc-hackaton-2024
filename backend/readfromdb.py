@@ -55,8 +55,8 @@ class DBPostHandling():
 class POIElement(ElementType):
     def __init__(self) -> None:
         self.ID = 0
-        self.x = 0
-        self.y = 0
+        self.lat = float
+        self.lng = float
         self.name = ''
         self.iconID = 0
         self.posts = []
@@ -65,7 +65,7 @@ class DBPOIHandling():
         self.db = TinyDB(DB_P_O_I_LINK)
 
     def _addEle(self, Element: POIElement) -> int:
-        self.db.insert({'ID': self.__lastID()+1, 'x': Element.x, 'y': Element.y, 
+        self.db.insert({'ID': self.__lastID()+1, 'lat': Element.lat, 'lng': Element.lng, 
                         'name': Element.name, 'iconID': Element.iconID, 'posts': []})
 
     def addPost(self, PlaceID: int , PostID: int):
