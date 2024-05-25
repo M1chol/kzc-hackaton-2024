@@ -1,9 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from readfromdb import PostElement, POIElement, UPElement, DBPostHandling, DBPOIHandling, DBUPHandling
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
 #TODO add user handling module
 
 app = FastAPI()
+
+
 
 origins = [
     "*",  # Allow all origins
@@ -32,10 +36,20 @@ def allPOIs():
 def search(POIID):
     return DBPOIHandler.getPost(POIID)
 
+class PostEle(BaseModel):
+    pinID: int
+    text: str
+    authorID: str
+    iconID: int
+
 @app.post("/pin")
-def addnewpost(post: PostElement, pinID: int):
-    id = DBPostHandler.addEle(post)
-    DBPOIHandler.addPost(pinID, id)
+def addnewpost(post: PostEle):
+    try:
+        id = DBPostHandler.addEle(post)
+        DBPOIHandler.addPost(post.pinID, id)
+        return {'id': id}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # @app.post("/users/signup/{UID}")
