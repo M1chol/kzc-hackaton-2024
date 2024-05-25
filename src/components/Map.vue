@@ -2,6 +2,10 @@
 import { GoogleMap, Marker } from 'vue3-google-map'
 import { pins }  from '../main.js'
 const center = { lat: 52.254205, lng: 20.903159 }
+const handlePinClick = (pin) => {
+  console.log("Marker clicked", pin)
+}
+
 </script>
 
 <template>
@@ -16,7 +20,10 @@ const center = { lat: 52.254205, lng: 20.903159 }
   :zoom="15"
   >
     <span v-for="pin in pins" :key="pin.ID">
-      <Marker :options="{ position: {lat: pin.lat, lng: pin.lng} }" />
+      <Marker 
+        :options="{ position: { lat: pin.x, lng: pin.y } }"
+        @click="() => handlePinClick(pin)"
+      />
     </span>
   </GoogleMap>
 </template>
