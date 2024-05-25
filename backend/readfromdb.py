@@ -161,7 +161,7 @@ if __name__ == '__main__':
     
     # DBUPHandler.addUser(1)
     ele = POIElement()
-    ele.UpdateParam(x=12, y=532, name='gehuhgeuguehg')
+    ele.UpdateParam(x=52.251782138860044,  y= 20.89641379302408, name='zydshop')
     DBPOIHandler._addEle(ele)
 
     # ele2 = POIElement()
