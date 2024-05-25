@@ -30,3 +30,6 @@ coverage
 *.tsbuildinfo
 
 google-api.txt
+/backend/test.py
+google-api.txt
+.venv
