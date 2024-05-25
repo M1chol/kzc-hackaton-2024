@@ -1,5 +1,5 @@
 <script setup>
-import { GoogleMap, Marker } from 'vue3-google-map'
+import { CustomMarker, GoogleMap, Marker } from 'vue3-google-map'
 import { pins }  from '../main.js'
 const center = { lat: 52.254205, lng: 20.903159 }
 const handlePinClick = (pin) => {
@@ -20,10 +20,12 @@ const handlePinClick = (pin) => {
   :zoom="15"
   >
     <span v-for="pin in pins" :key="pin.ID">
-      <Marker 
+      <CustomMarker 
         :options="{ position: { lat: pin.x, lng: pin.y } }"
         @click="() => handlePinClick(pin)"
-      />
+      >
+        <img src="/Ikonka_autobus.png" style="width:55px;height:55px;" />
+      </CustomMarker>
     </span>
   </GoogleMap>
 </template>
