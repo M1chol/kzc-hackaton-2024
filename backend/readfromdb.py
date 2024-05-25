@@ -1,9 +1,9 @@
 from tinydb import TinyDB, Query
 import datetime
 
-DB_POSTS_LINK = 'backend\databases\posts.json'
-DB_P_O_I_LINK = 'backend\databases\pointsofintrest.json'
-DB_UP_LINK = 'backend\databases\userpins.json'
+DB_POSTS_LINK = r'backend\databases\posts.json'
+DB_P_O_I_LINK = r'backend\databases\pointsofintrest.json'
+DB_UP_LINK = r"backend\databases\userfav.json"
 
 #TODO Error handling
 class ElementType():
@@ -152,6 +152,7 @@ if __name__ == '__main__':
     DBPOIHandler = DBPOIHandling()
     DBUPHandler = DBUPHandling()
     
+    DBUPHandler.addUser(1)
     # ele1 = PostElement("twoja stara")
     # ele1.ID = ele1.UpdateParam(txt = 'WIeLka imba')
     # DBPostHandler.addEle(ele1)
