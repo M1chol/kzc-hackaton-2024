@@ -4,7 +4,7 @@
             <nav>
                 <div id="upperBar">
                     <div id="search"></div>
-                    <div id="logo"></div>
+                    <div id="logo">WAT CONNECT</div>
                     <div id="menubutton">
                         <MenuButton @toggleMenu="(state) => handleToggleMenu(state)"></MenuButton>
                     </div>
@@ -20,16 +20,21 @@
             </nav>
         </div>
     </div>
+    <div id="addpost">
+        <button>
+            Dodaj Post <span>+</span>
+        </button>
+    </div>
 </template>
 
 <script setup>
     const handleToggleMenu = (state) => {
         if(state){
-            document.getElementById("middlebar").style.display ="block";
+            document.getElementById("middlebar").style.display ="flex";
             document.getElementById("lowerbar").style.display ="none";
         } else {
             document.getElementById("middlebar").style.display = "none";
-            document.getElementById("lowerbar").style.display ="block";
+            document.getElementById("lowerbar").style.display ="flex";
         }
     }
 </script>
@@ -50,10 +55,65 @@ export default {
 
 <style scoped>
 
+button {
+    background-color: #76885B;
+    border: 1px solid rgb(209,213,219);
+    border-radius: .5rem;
+    color: #111827;
+    font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: .25rem .75rem;
+    text-align: center;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    color: white;
+    }
+
+    button:hover {
+    background-color: #627254;
+    }
+
+    button:focus {
+    outline: 2px solid rgba(0,0,0,0.1);
+    outline-offset: 2px;
+    }
+
+    button:focus-visible {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    }
+
+    button span {
+        font-size: 20px;
+        padding: 0;
+        margin: 0;
+    }
+#addpost {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 130px;
+    height: 60px;
+    z-index: 1;
+}
+
 #middlebar {
     display: none;
     height: calc(100vh - 80px);
     width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center;
 }
 
 nav {
