@@ -2,18 +2,18 @@
     <div id="wrapper1">
         <div id="wrapper2">
             <nav>
-            <div id="upperbar">
-                <div id="search"></div>
-                <div id="logo"></div>
-                <div id="menu">
-                <MenuButton></MenuButton>
+                <div id="upperbar">
+                    <div id="search"></div>
+                    <div id="logo"></div>
+                    <div id="menu">
+                    <MenuButton></MenuButton>
+                    </div>
                 </div>
-            </div>
-            <div id="lowerbar">
-                <div id="markers">
-                    <Marker></Marker>
+                <div id="lowerbar">
+                    <div id="markers">
+                        <Marker></Marker>
+                    </div>
                 </div>
-            </div>
             </nav>
         </div>
     </div>
@@ -33,24 +33,9 @@ export default {
 </script>
 
 <style scoped>
-.darkgreen {
-    background-color: #627254;
-}
 
-.lightgreen {
-    background-color: #76885B;
-}
-
-.gray {
-    background-color: #DDDDDD;
-}
-
-.lightgray {
-    background-color: #EEEEEE;
-}
 
 nav {
-    height: 110px;
     display: flex;
     border-radius: 20px;
     flex-direction: column;
