@@ -11,7 +11,8 @@ class Element():
         self.y = 0;
         self.txt = '';
         self.authorID = authorID;
-        self.date = str(datetime.datetime(2000,1,1));
+        self.date = str(datetime.datetime.now());
+        self.experimentationDate = '';
         self.iconID = 0;
     
     def UpdateParam(self, **kwargs):
@@ -27,12 +28,13 @@ class DBHandling():
     def addEle(self, Element: Element) -> int:
         self.db.insert({'ID': self.__lastID()+1, 'x': Element.x, 'y': Element.y, 
                         'txt': Element.txt, 'authorID': Element.authorID,
-                        'date': Element.date, 'iconID': Element.iconID})
+                        'date': Element.date, 'iconID': Element.iconID, 
+                        'experimentationDate': Element.experimentationDate})
     
     def getAll(self) -> list:
         return self.db.all()
     
-    def _clearData(self) -> None:
+    def __clearData(self) -> None:
         self.db.truncate()
     
     def __lastID(self) -> int:
