@@ -6,7 +6,6 @@ DB_P_O_I_LINK = r'backend\databases\pointsofintrest.json'
 DB_UP_LINK = r"backend\databases\userfav.json"
 
 #TODO Error handling
-#TODO powróć x, y
 class ElementType():
     def __init__(self) -> None:
         pass
@@ -27,6 +26,7 @@ class PostElement(ElementType):
         self.experimentationDate = str(datetime.datetime.now())
         self.iconID = 0
         self.like = 0
+        super().__init__()
     
 class DBPostHandling():
     def __init__(self) -> None:
@@ -62,6 +62,7 @@ class POIElement(ElementType):
         self.name = ''
         self.iconID = 0
         self.posts = []
+        super().__init__()
 class DBPOIHandling():
     def __init__(self) -> None:
         self.db = TinyDB(DB_P_O_I_LINK)
@@ -107,13 +108,18 @@ class UPElement(ElementType):
     def __init__(self, authorID: str) -> None:
         self.UID = 0
         self.favid = 12
+        super().__init__()
 
 class DBUPHandling():
     def __init__(self) -> None:
         self.db = TinyDB(DB_UP_LINK)
 
     def addUser(self, UID: int) -> None:
-        self.db.insert({'UID': UID, 'fav': []})
+        User = Query()
+        result = self.db.search(User.UID == UID)
+
+        if not result:
+            self.db.insert({'UID': UID, 'fav': []})
     
     def addEle(self, Element: UPElement) -> None:
         database = Query()
@@ -153,10 +159,10 @@ if __name__ == '__main__':
     DBPOIHandler = DBPOIHandling()
     DBUPHandler = DBUPHandling()
     
-    DBUPHandler.addUser(1)
-    # ele1 = PostElement("twoja stara")
-    # ele1.ID = ele1.UpdateParam(txt = 'WIeLka imba')
-    # DBPostHandler.addEle(ele1)
+    # DBUPHandler.addUser(1)
+    ele = POIElement()
+    ele.UpdateParam(x=12, y=532, name='gehuhgeuguehg')
+    DBPOIHandler._addEle(ele)
 
     # ele2 = POIElement()
     # ele2.ID = ele2.UpdateParam(x=13, y=14, name='Hinczyk')
@@ -170,4 +176,4 @@ if __name__ == '__main__':
     # DBPOIHandler.addPost(3, 1)
 
 
-    print(DBUPHandler.getAll())
+    # print(DBUPHandler.getAll())
