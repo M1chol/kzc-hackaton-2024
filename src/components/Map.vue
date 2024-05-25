@@ -5,7 +5,15 @@ const center = { lat: 52.254205, lng: 20.903159 }
 const handlePinClick = (pin) => {
   console.log("Marker clicked", pin)
 }
-
+const lookupIcon = [
+  "/Ikonka_autobus.png",
+  "/Ikonka_jedzenie.png",
+  "/Ikonka_sport.png",
+  "/Ikonka_szpital.png",
+  "/Ikonka_tramwaj.png",
+  "/Ikonka_uczelnia.png",
+  "/Ikonka_wip.png"
+]
 </script>
 
 <template>
@@ -24,7 +32,7 @@ const handlePinClick = (pin) => {
         :options="{ position: { lat: pin.x, lng: pin.y } }"
         @click="() => handlePinClick(pin)"
       >
-        <img src="/Ikonka_autobus.png" style="width:55px;height:55px;" />
+        <img v-bind:src="lookupIcon[pin.iconID]" style="width:55px;height:55px;" />
       </CustomMarker>
     </span>
   </GoogleMap>
