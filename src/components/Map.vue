@@ -31,6 +31,8 @@ const lookupIcon = [
    "
   :center="center"
   :zoom="15"
+  :fullscreenControl="false"
+  :clickableIcons="false"
   >
     <span v-for="pin in pins" :key="pin.ID">
       <CustomMarker 
