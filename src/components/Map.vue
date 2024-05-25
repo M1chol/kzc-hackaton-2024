@@ -10,6 +10,7 @@ const center = { lat: 52.254205, lng: 20.903159 }
   style="width: 100%;
    height: 100%;
     position: absolute;
+    top: 0px;
    "
   :center="center"
   :zoom="15"

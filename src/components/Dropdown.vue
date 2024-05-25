@@ -11,9 +11,7 @@
             </div>
             <div id="lowerbar">
                 <div id="markers">
-                <div class="marker">
-                    <span>20</span>
-                </div>
+                    <Marker></Marker>
                 </div>
             </div>
             </nav>
@@ -23,11 +21,13 @@
 
 <script>
 import MenuButton from './MenuButton.vue'
+import Marker from './Marker.vue'
 
 export default {
     name: 'Dropdown',
     components: {
-        MenuButton
+        MenuButton,
+        Marker
     }
 }
 </script>
@@ -56,7 +56,7 @@ nav {
     flex-direction: column;
     overflow: hidden;
     background-color: #DDDDDD;
-    max-width: 700px;
+    flex-basis: 700px;
     box-shadow: 0 3px 30px gray;
     margin: 10px;
 }
@@ -95,12 +95,6 @@ nav {
     gap: 5px;
 }
 
-.marker {
-    height: 40px;
-    background-color: #EEEEEE;
-    gap: 5px;
-}
-
 #wrapper1 {
     position: absolute;
     width: 100%;
@@ -108,7 +102,7 @@ nav {
 }
 
 #wrapper2 {
-    margin-left: auto;
-    margin-right: 0;
+    display: flex;
+    justify-content: right;
 }
 </style>
