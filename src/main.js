@@ -1,7 +1,7 @@
 import { createApp, ref } from 'vue'
 import App from './App.vue'
 
-export const pins = ref([]); // Initialize as a reactive reference for pins list
+export const pins = ref([   ]); // Initialize as a reactive reference for pins list
 
 async function fetchData() {
     try {
