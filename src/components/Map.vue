@@ -7,7 +7,10 @@ const center = { lat: 40.689247, lng: -74.044502 }
 <template>
   <GoogleMap
   api-key="AIzaSyBuA4DzGdYl_hOXUgB3W5ejpnxhu0f6rPg"
-  style="width: 100%; height: 500px"
+  style="width: 100%;
+   height: 100%;
+    position: absolute;
+   "
   :center="center"
   :zoom="15"
   >

@@ -1,20 +1,24 @@
 <template>
-    <nav>
-      <div id="upperbar">
-        <div id="search"></div>
-        <div id="logo"></div>
-        <div id="menu">
-          <MenuButton></MenuButton>
+    <div id="wrapper1">
+        <div id="wrapper2">
+            <nav>
+            <div id="upperbar">
+                <div id="search"></div>
+                <div id="logo"></div>
+                <div id="menu">
+                <MenuButton></MenuButton>
+                </div>
+            </div>
+            <div id="lowerbar">
+                <div id="markers">
+                <div class="marker">
+                    <span>20</span>
+                </div>
+                </div>
+            </div>
+            </nav>
         </div>
-      </div>
-      <div id="lowerbar">
-        <div id="markers">
-          <div class="marker">
-            <span>20</span>
-          </div>
-        </div>
-      </div>
-    </nav>
+    </div>
 </template>
 
 <script>
@@ -45,15 +49,6 @@ export default {
     background-color: #EEEEEE;
 }
 
-body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap-reverse;
-    justify-content: center;
-    background-image: url("../src/assets/testbackground.jpg");
-}
-
 nav {
     height: 110px;
     display: flex;
@@ -61,9 +56,9 @@ nav {
     flex-direction: column;
     overflow: hidden;
     background-color: #DDDDDD;
-    margin: 10px;
     max-width: 700px;
     box-shadow: 0 3px 30px gray;
+    margin: 10px;
 }
 
 #upperbar {
@@ -106,8 +101,14 @@ nav {
     gap: 5px;
 }
 
-#app {
-    flex-grow: 5;
-    background-color: #627254;
+#wrapper1 {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+#wrapper2 {
+    margin-left: auto;
+    margin-right: 0;
 }
 </style>
