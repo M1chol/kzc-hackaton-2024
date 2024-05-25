@@ -5,13 +5,16 @@
                 <div id="upperBar">
                     <div id="search"></div>
                     <div id="logo"></div>
-                    <div id="menu">
-                    <MenuButton @toggleMenu="(state) => handleToggleMenu(state)"></MenuButton>
+                    <div id="menubutton">
+                        <MenuButton @toggleMenu="(state) => handleToggleMenu(state)"></MenuButton>
                     </div>
                 </div>
+                <div id="middlebar">
+                    <Menu></Menu>
+                </div>
                 <div id="lowerbar">
-                    <div id="markers">
-                        <Marker></Marker>
+                    <div id="favourites">
+                        <Favourite></Favourite>
                     </div>
                 </div>
             </nav>
@@ -22,31 +25,39 @@
 <script setup>
     const handleToggleMenu = (state) => {
         if(state){
-            document.getElementById("upperBar").style.height = "calc(100vh - 80px)";
+            document.getElementById("middlebar").style.display ="block";
+            document.getElementById("lowerbar").style.display ="none";
         } else {
-            document.getElementById("upperBar").style.height = "60px";
-
+            document.getElementById("middlebar").style.display = "none";
+            document.getElementById("lowerbar").style.display ="block";
         }
     }
 </script>
 
 <script>
 import MenuButton from './MenuButton.vue'
-import Marker from './Favourites.vue'
+import Menu from './Menu.vue'
+import Favourite from './Favourites.vue'
 
 export default {
     name: 'Dropdown',
     components: {
         MenuButton,
-        Marker
+        Favourite
     }
 }
 </script>
 
 <style scoped>
 
+#middlebar {
+    display: none;
+    height: calc(100vh - 80px);
+    width: 100%;
+}
 
 nav {
+    pointer-events: all;
     display: flex;
     border-radius: 20px;
     flex-direction: column;
@@ -73,7 +84,7 @@ nav {
 #logo {
     flex-basis: 100%;    
 }
-#menu {
+#menubutton {
     display: flex;
     justify-content: right;
     flex-grow: 0;
@@ -95,6 +106,7 @@ nav {
     position: absolute;
     width: 100%;
     z-index: 1;
+    pointer-events: none;
 }
 
 #wrapper2 {
