@@ -3,7 +3,20 @@ import datetime
 
 DB_POSTS_LINK = 'backend\databases\posts.json'
 DB_P_O_I_LINK = 'backend\databases\pointsofintrest.json'
-class PostElement():
+
+
+class ElementType():
+    def __init__(self) -> None:
+        pass
+    def UpdateParam(self, **kwargs):
+        for paramName, newVal in kwargs.items():
+            if str(paramName) != 'ID' and hasattr(self, paramName):
+                setattr(self, paramName, newVal)
+            else:
+                raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{paramName}'")
+
+
+class PostElement(ElementType):
     def __init__(self, authorID: str) -> None:
         self.ID = 0
         self.txt = ''
@@ -13,12 +26,6 @@ class PostElement():
         self.iconID = 0
         self.like = 0
     
-    def UpdateParam(self, **kwargs):
-        for paramName, newVal in kwargs.items():
-            if str(paramName) != 'ID' and hasattr(self, paramName):
-                setattr(self, paramName, newVal)
-            else:
-                raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{paramName}'")
 class DBPostHandling():
     def __init__(self) -> None:
         self.db = TinyDB(DB_POSTS_LINK)
@@ -44,10 +51,8 @@ class DBPostHandling():
                 last = ele['ID']
         return last
 
-
-
 #!ODZIELANIE POI OD POST
-class POIElement():
+class POIElement(ElementType):
     def __init__(self) -> None:
         self.ID = 0
         self.x = 0
@@ -55,17 +60,6 @@ class POIElement():
         self.name = ''
         self.iconID = 0
         self.posts = []
-    
-    def UpdateParam(self, **kwargs):
-        for paramName, newVal in kwargs.items():
-            if str(paramName) != 'ID' and hasattr(self, paramName):
-                setattr(self, paramName, newVal)
-            else:
-                raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{paramName}'")
-    
-    def getAll(self) -> list:
-        return self.db.all()
-
 class DBPOIHandling():
     def __init__(self) -> None:
         self.db = TinyDB(DB_P_O_I_LINK)
@@ -94,6 +88,14 @@ class DBPOIHandling():
 
     def getAll(self) -> list:
         return self.db.all()
+
+#!ODZIELENIE POI OD USERPlACES
+#TODO dokończyć userplaces
+class UPElement(ElementType):
+    def __init__(self, authorID: str) -> None:
+        self.USERID = 0
+        self.fav = []
+
 if __name__ == '__main__':
     DBPostHandler = DBPostHandling()
     DBPOIHandler = DBPOIHandling()
