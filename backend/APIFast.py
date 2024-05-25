@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from readfromdb import PostElement, POIElement, UPElement, DBPostHandling, DBPOIHandling
+from readfromdb import PostElement, POIElement, UPElement, DBPostHandling, DBPOIHandling, DBUPHandling
 from fastapi.middleware.cors import CORSMiddleware
 #TODO add user handling module
 
@@ -20,7 +20,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+DBPostHandler = DBPostHandling()
 DBPOIHandler = DBPOIHandling()
+DBUPHandler = DBUPHandling()
 
 @app.get("/pins")
 def allPOIs():
@@ -29,3 +31,11 @@ def allPOIs():
 @app.get("/posts/{POIID}")
 def search(POIID):
     return DBPOIHandler.getPost(POIID)
+
+@app.post("/users/signup/{UID}")
+def createUser(UID):
+    DBUPHandler.addUser(UID)
+
+@app.post("/users/login/{UID}")
+def login(UID):
+    pass
