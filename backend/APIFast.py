@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException
 from readfromdb import PostElement, POIElement, UPElement, DBPostHandling, DBPOIHandling, DBUPHandling
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import datetime
+
 
 #TODO add user handling module
 
@@ -36,7 +38,8 @@ def allPOIs():
 def search(POIID: int):
     posts = DBPOIHandler.getPost(POIID)
     print(posts)
-    wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts]
+    wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts if dict(DBPostHandler.getEleByID(ID))['experimentationDate'] > dict(DBPostHandler.getEleByID(ID))['date']]
+    # wszystkie_wyniki = [element for element in wszystkie_wyniki if element.experimentationDate > element.date ]
     return wszystkie_wyniki
 
 class PostEle(BaseModel):
