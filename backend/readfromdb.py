@@ -43,6 +43,11 @@ class DBPostHandling():
     def getAll(self) -> list:
         return self.db.all()
 
+    def getEleByID(self, ID: int) -> dict:
+        listaslow = self.db.all()
+        znaleziony_element = next((element for element in listaslow if element['ID'] == ID), None)
+        return znaleziony_element
+
     def __clearData(self) -> None:
         self.db.truncate()
     
@@ -163,6 +168,10 @@ if __name__ == '__main__':
     ele = POIElement()
     ele.UpdateParam(x=52.251782138860044,  y= 20.89641379302408, name='zydshop')
     DBPOIHandler._addEle(ele)
+
+    DBPOIHandler.addPost(1,1)
+    print(DBPOIHandler.getPost(1))
+    print(dict(DBPostHandler.getEleByID(1)))
 
     # ele2 = POIElement()
     # ele2.ID = ele2.UpdateParam(x=13, y=14, name='Hinczyk')

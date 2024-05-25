@@ -1,9 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from readfromdb import PostElement, POIElement, UPElement, DBPostHandling, DBPOIHandling, DBUPHandling
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import datetime
+
+
 #TODO add user handling module
 
 app = FastAPI()
+
+
 
 origins = [
     "*",  # Allow all origins
@@ -28,20 +34,26 @@ DBUPHandler = DBUPHandling()
 def allPOIs():
     return DBPOIHandler.getAll()
 
-@app.get("/posts")
+@app.get("/posts/{POIID}")
 def search(POIID: int):
-    return DBPOIHandler.getPost(POIID)
+    posts = DBPOIHandler.getPost(POIID)
+    print(posts)
+    wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts if dict(DBPostHandler.getEleByID(ID))['experimentationDate'] > dict(DBPostHandler.getEleByID(ID))['date']]
+    # wszystkie_wyniki = [element for element in wszystkie_wyniki if element.experimentationDate > element.date ]
+    return wszystkie_wyniki
 
-@app.post("/pin")
-def addnewpost(post: PostElement, pinID: int):
-    id = DBPostHandler.addEle(post)
-    DBPOIHandler.addPost(pinID, id)
+class PostEle(BaseModel):
+    pinID: int
+    text: str
+    authorID: str
+    iconID: int
 
+@app.post("/pins")
+def addnewpost(post: PostEle):
+    try:
+        id = DBPostHandler.addEle(post)
+        DBPOIHandler.addPost(post.pinID, id)
+        return {'id': id}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-# @app.post("/users/signup/{UID}")
-# def createUser(UID):
-#     DBUPHandler.addUser(UID)
-
-# @app.post("/users/login/{UID}")
-# def login(UID):
-#     pass
