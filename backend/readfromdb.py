@@ -29,6 +29,9 @@ class DBHandling():
     
     def getAll(self) -> list:
         return self.db.all()
+    
+    def __clearData(self) -> None:
+        self.db.truncate()
 
 if __name__ == '__main__':
     DBHandler = DBHandling()
