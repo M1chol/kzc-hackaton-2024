@@ -1,8 +1,9 @@
 from fastapi import FastAPI, HTTPException
-from readfromdb import PostElement, POIElement, UPElement, DBPostHandling, DBPOIHandling, DBUPHandling
+from readfromdb import PostElement, POIElement, UPElement, DBPostHandling, DBPOIHandling, DBUPHandling, DBINFOHandling
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import datetime
+# import CiastkowyPotwor
 
 
 #TODO add user handling module
@@ -28,10 +29,15 @@ app.add_middleware(
 DBPostHandler = DBPostHandling()
 DBPOIHandler = DBPOIHandling()
 DBUPHandler = DBUPHandling()
+DBINFOHandler = DBINFOHandling()
 
 @app.get("/pins")
 def allPOIs():
     return DBPOIHandler.getAll()
+
+@app.get("/pin/{POIID}")
+def allPOIs(POIID: int):
+    return DBINFOHandler.getinfo(POIID)
 
 @app.get("/posts/{POIID}")
 def search(POIID: int):
@@ -40,7 +46,12 @@ def search(POIID: int):
     wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts if dict(DBPostHandler.getEleByID(ID))['experimentationDate'] > dict(DBPostHandler.getEleByID(ID))['date']]
     return wszystkie_wyniki
 
+class UserInfo(BaseModel):
+    UID: int
 
+@app.post("/users/login")
+def login(UserInfo):
+    pass
 
 
 class PostEle(BaseModel):

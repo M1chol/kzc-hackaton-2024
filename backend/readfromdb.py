@@ -4,6 +4,8 @@ import datetime
 DB_POSTS_LINK = r'backend\databases\posts.json'
 DB_P_O_I_LINK = r'backend\databases\pointsofintrest.json'
 DB_UP_LINK = r"backend\databases\userfav.json"
+DB_INFO_LINK = r"backend\databases\info.json"
+#https://www.youtube.com/watch?v=xYG89rB6c5k
 
 #TODO Error handling
 class ElementType():
@@ -15,7 +17,6 @@ class ElementType():
                 setattr(self, paramName, newVal)
             else:
                 raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{paramName}'")
-
 
 class PostElement(ElementType):
     def __init__(self, authorID: str) -> None:
@@ -68,6 +69,7 @@ class POIElement(ElementType):
         self.iconID = 0
         self.posts = []
         super().__init__()
+
 class DBPOIHandling():
     def __init__(self) -> None:
         self.db = TinyDB(DB_P_O_I_LINK)
@@ -159,6 +161,27 @@ class DBUPHandling():
         return self.db.all()
 
 
+#!ODZIELENIE USERPLACES OD INFO
+
+class InfoElement(ElementType):
+    def __init__(self) -> None:
+        self.PINID: int
+        self.info: str
+        super().__init__()
+class DBINFOHandling():
+    def __init__(self) -> None:
+        self.db = TinyDB(DB_INFO_LINK)
+
+    def _addEle(self, Element: InfoElement) -> None:
+        for ele in iter(self.db):
+            if ele['PINID'] == Element.PINID:
+                return
+        self.db.insert({'PINID': Element.PINID, 'info': Element.info})
+
+    def getinfo(self, PINID: int) -> str:
+        listaslow = self.db.all()
+        znaleziony_element = next((element for element in listaslow if element['PINID'] == PINID), None)
+        return znaleziony_element['info']
 if __name__ == '__main__':
     DBPostHandler = DBPostHandling()
     DBPOIHandler = DBPOIHandling()
