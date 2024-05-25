@@ -6,7 +6,7 @@
                     <div id="search"></div>
                     <div id="logo"></div>
                     <div id="menu">
-                    <MenuButton></MenuButton>
+                    <MenuButton @toggleMenu="handleToggleMenu"></MenuButton>
                     </div>
                 </div>
                 <div id="lowerbar">
@@ -19,9 +19,15 @@
     </div>
 </template>
 
+<script setup>
+    const handleToggleMenu = () => {
+        console.log("test")
+    }
+</script>
+
 <script>
 import MenuButton from './MenuButton.vue'
-import Marker from './Marker.vue'
+import Marker from './Favourites.vue'
 
 export default {
     name: 'Dropdown',
@@ -30,6 +36,8 @@ export default {
         Marker
     }
 }
+
+
 </script>
 
 <style scoped>
