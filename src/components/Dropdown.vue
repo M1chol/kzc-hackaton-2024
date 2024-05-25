@@ -2,11 +2,11 @@
     <div id="wrapper1">
         <div id="wrapper2">
             <nav>
-                <div id="upperbar">
+                <div id="upperBar">
                     <div id="search"></div>
                     <div id="logo"></div>
                     <div id="menu">
-                    <MenuButton @toggleMenu="handleToggleMenu"></MenuButton>
+                    <MenuButton @toggleMenu="(state) => handleToggleMenu(state)"></MenuButton>
                     </div>
                 </div>
                 <div id="lowerbar">
@@ -20,8 +20,13 @@
 </template>
 
 <script setup>
-    const handleToggleMenu = () => {
-        console.log("test")
+    const handleToggleMenu = (state) => {
+        if(state){
+            document.getElementById("upperBar").style.height = "calc(100vh - 80px)";
+        } else {
+            document.getElementById("upperBar").style.height = "60px";
+
+        }
     }
 </script>
 
@@ -36,8 +41,6 @@ export default {
         Marker
     }
 }
-
-
 </script>
 
 <style scoped>
@@ -54,7 +57,7 @@ nav {
     margin: 10px;
 }
 
-#upperbar {
+#upperBar {
     background-color: #EEEEEE;
     flex-direction: row;
     display: flex;
