@@ -89,6 +89,15 @@ class DBPOIHandling():
     def getAll(self) -> list:
         return self.db.all()
 
+    def getPost(self, PlaceID: int) -> list:
+        database = Query()
+        place = self.db.get(database.ID == PlaceID)
+        if place is not None:
+            posts = place.get('posts', [])
+            return posts
+        else:
+            return [0]
+        
 #!ODZIELENIE POI OD USERPlACES
 #TODO dokończyć userplaces
 class UPElement(ElementType):
