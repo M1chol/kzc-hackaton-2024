@@ -33,8 +33,11 @@ def allPOIs():
     return DBPOIHandler.getAll()
 
 @app.get("/posts/{POIID}")
-def search(POIID):
-    return DBPOIHandler.getPost(POIID)
+def search(POIID: int):
+    posts = DBPOIHandler.getPost(POIID)
+    print(posts)
+    wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts]
+    return wszystkie_wyniki
 
 class PostEle(BaseModel):
     pinID: int
@@ -42,7 +45,7 @@ class PostEle(BaseModel):
     authorID: str
     iconID: int
 
-@app.post("/pin")
+@app.post("/pins")
 def addnewpost(post: PostEle):
     try:
         id = DBPostHandler.addEle(post)
@@ -51,11 +54,3 @@ def addnewpost(post: PostEle):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
-# @app.post("/users/signup/{UID}")
-# def createUser(UID):
-#     DBUPHandler.addUser(UID)
-
-# @app.post("/users/login/{UID}")
-# def login(UID):
-#     pass
