@@ -6,6 +6,10 @@ app = FastAPI()
 
 DBPOIHandler = DBPOIHandling()
 
-@app.getPOIs("/")
+@app.get("/pins")
 def allPOIs():
     return DBPOIHandler.getAll()
+
+@app.get("/posts/{POIID}")
+def search(POIID):
+    return DBPOIHandler.getPost(POIID)
