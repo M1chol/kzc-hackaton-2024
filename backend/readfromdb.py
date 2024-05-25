@@ -1,10 +1,11 @@
 from tinydb import TinyDB, Query
 import datetime
 
-DB_POSTS_LINK = 'backend\databases\posts.json'
-DB_P_O_I_LINK = 'backend\databases\pointsofintrest.json'
+DB_POSTS_LINK = r'backend\databases\posts.json'
+DB_P_O_I_LINK = r'backend\databases\pointsofintrest.json'
+DB_UP_LINK = r"backend\databases\userfav.json"
 
-
+#TODO Error handling
 class ElementType():
     def __init__(self) -> None:
         pass
@@ -65,8 +66,10 @@ class DBPOIHandling():
         self.db = TinyDB(DB_P_O_I_LINK)
 
     def _addEle(self, Element: POIElement) -> int:
-        self.db.insert({'ID': self.__lastID()+1, 'lat': Element.lat, 'lng': Element.lng, 
+        lastID = self.__lastID()
+        self.db.insert({'ID': lastID+1, 'lat': Element.lat, 'lng': Element.lng, 
                         'name': Element.name, 'iconID': Element.iconID, 'posts': []})
+        return lastID
 
     def addPost(self, PlaceID: int , PostID: int):
         database = Query()
@@ -99,16 +102,57 @@ class DBPOIHandling():
             return [0]
         
 #!ODZIELENIE POI OD USERPlACES
-#TODO dokończyć userplaces
 class UPElement(ElementType):
     def __init__(self, authorID: str) -> None:
-        self.USERID = 0
-        self.fav = []
+        self.UID = 0
+        self.favid = 12
+
+class DBUPHandling():
+    def __init__(self) -> None:
+        self.db = TinyDB(DB_UP_LINK)
+
+    def addUser(self, UID: int) -> None:
+        self.db.insert({'UID': UID, 'fav': []})
+    
+    def addEle(self, Element: UPElement) -> None:
+        database = Query()
+        userelement = self.db.get(database.UID == Element.UID)
+        if userelement is not None:
+            posts = userelement.get('fav', [])
+            posts.append(Element.favid)
+            self.db.update({'fav': posts}, database.UID == Element.UID)
+        else:
+            print("User not found in database.")
+
+    def delEle(self, Element: UPElement) -> None:
+        database = Query()
+        userelement = self.db.get(database.UID == Element.UID)
+        if userelement is not None:
+            posts = userelement.get('fav', [])
+            posts.remove(Element.favid)
+            self.db.update({'fav': posts}, database.UID == Element.UID)
+        else:
+            print("User not found in database.")
+
+    def getfavs(self, UID: int) -> list:
+        database = Query()
+        userelement = self.db.get(database.UID == UID)
+        if userelement is not None:
+            posts = userelement.get('fav', [])
+            return posts
+        else:
+            print("User not found in database.")
+
+    def getAll(self) -> list:
+        return self.db.all()
+
 
 if __name__ == '__main__':
     DBPostHandler = DBPostHandling()
     DBPOIHandler = DBPOIHandling()
+    DBUPHandler = DBUPHandling()
     
+    DBUPHandler.addUser(1)
     # ele1 = PostElement("twoja stara")
     # ele1.ID = ele1.UpdateParam(txt = 'WIeLka imba')
     # DBPostHandler.addEle(ele1)
@@ -124,4 +168,5 @@ if __name__ == '__main__':
 
     # DBPOIHandler.addPost(3, 1)
 
-    print(DBPOIHandler.getAll())
+
+    print(DBUPHandler.getAll())
