@@ -1,6 +1,7 @@
 <script setup>
 import { CustomMarker, GoogleMap, InfoWindow } from 'vue3-google-map'
-import { pins }  from '../main.js'
+import { pins } from '../main.js'
+import Popup from './Popup.vue'
 const center = { lat: 52.254205, lng: 20.903159 }
 let activePopups = []
 let popupId = 0
@@ -40,7 +41,7 @@ const lookupIcon = [
       </CustomMarker>
     </span>
     <span v-for="popup in activePopups" :key="popup.ID">
-        <InfoWindow :options="{ position: { lat: popup.x, lng: popup.y }, content: popup.text }" />
+        <InfoWindow :options="{ position: { lat: popup.x, lng: popup.y } }"> <Popup :title="popup.text"/> </InfoWindow>
     </span>
   </GoogleMap>
 </template>
