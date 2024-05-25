@@ -1,6 +1,6 @@
 <script setup>
 import { GoogleMap, Marker } from 'vue3-google-map'
-
+import { pins }  from '../main.js'
 const center = { lat: 52.254205, lng: 20.903159 }
 </script>
 
@@ -14,7 +14,9 @@ const center = { lat: 52.254205, lng: 20.903159 }
   :center="center"
   :zoom="15"
   >
-    <Marker :options="{ position: center }" />
+    <span v-for="pin in pins" :key="pin.ID">
+      <Marker :options="{ position: {lat: pin.lat, lng: pin.lng} }" />
+    </span>
   </GoogleMap>
 </template>
 
