@@ -1,6 +1,19 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
-import App from './App.vue'
+import VueGoogleMaps from '@fawmi/vue-google-maps'
 
-createApp(App).mount('#app')
+let apikey = ""
+
+try {
+    const data = fs.readFileSync('./google-api.txt', 'utf8');
+    apikey = data
+} catch (err) {
+    console.error(err);
+}
+
+const app = createApp(App);
+app.use(VueGoogleMaps, {
+    load: {
+        key: apikey,
+        // language: 'de',
+    },
+}).mount('#app')
