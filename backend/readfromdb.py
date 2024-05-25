@@ -165,8 +165,8 @@ class DBUPHandling():
 
 class InfoElement(ElementType):
     def __init__(self) -> None:
-        self.PINID: int
-        self.info: str
+        self.PINID = 0
+        self.info = ''
         super().__init__()
 class DBINFOHandling():
     def __init__(self) -> None:
@@ -180,21 +180,30 @@ class DBINFOHandling():
 
     def getinfo(self, PINID: int) -> str:
         listaslow = self.db.all()
-        znaleziony_element = next((element for element in listaslow if element['PINID'] == PINID), None)
-        return znaleziony_element['info']
+        znaleziony_element = next((element for element in listaslow if element['PINID'] == PINID),  None)
+        if znaleziony_element:
+            return znaleziony_element['info']
+        else:
+            return 'PLS HELP ME IM STUCK IN INFO PANEL'
 if __name__ == '__main__':
     DBPostHandler = DBPostHandling()
     DBPOIHandler = DBPOIHandling()
     DBUPHandler = DBUPHandling()
-    
+    DBINFOHandler = DBINFOHandling()
     # DBUPHandler.addUser(1)
-    ele = POIElement()
-    ele.UpdateParam(x=52.251782138860044,  y= 20.89641379302408, name='zydshop')
-    DBPOIHandler._addEle(ele)
+    # ele = POIElement()
+    # ele.UpdateParam(x=52.251782138860044,  y= 20.89641379302408, name='zydshop')
+    # DBPOIHandler._addEle(ele)
 
-    DBPOIHandler.addPost(1,1)
-    print(DBPOIHandler.getPost(1))
-    print(dict(DBPostHandler.getEleByID(1)))
+    # DBPOIHandler.addPost(1,1)
+    # print(DBPOIHandler.getPost(1))
+    # print(dict(DBPostHandler.getEleByID(1)))
+
+    # ele = InfoElement()
+    # ele.UpdateParam(PINID = 1, info = "teiwuhgtyuewsgwye")
+    # DBINFOHandler._addEle(ele)
+
+    print(DBINFOHandler.getinfo(3))
 
     # ele2 = POIElement()
     # ele2.ID = ele2.UpdateParam(x=13, y=14, name='Hinczyk')

@@ -36,7 +36,7 @@ def allPOIs():
     return DBPOIHandler.getAll()
 
 @app.get("/pin/{POIID}")
-def allPOIs(POIID: int):
+def allPOIs(POIID: int) -> str:
     return DBINFOHandler.getinfo(POIID)
 
 @app.get("/posts/{POIID}")
