@@ -10,7 +10,6 @@ import datetime
 app = FastAPI()
 
 
-
 origins = [
     "*",  # Allow all origins
     # or specify your origins:
@@ -39,8 +38,10 @@ def search(POIID: int):
     posts = DBPOIHandler.getPost(POIID)
     print(posts)
     wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts if dict(DBPostHandler.getEleByID(ID))['experimentationDate'] > dict(DBPostHandler.getEleByID(ID))['date']]
-    # wszystkie_wyniki = [element for element in wszystkie_wyniki if element.experimentationDate > element.date ]
     return wszystkie_wyniki
+
+
+
 
 class PostEle(BaseModel):
     pinID: int
