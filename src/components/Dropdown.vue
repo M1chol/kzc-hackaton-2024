@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import MenuButton from 'MenuButton.vue'
+import MenuButton from './MenuButton.vue'
 
 export default {
     name: 'Dropdown',
