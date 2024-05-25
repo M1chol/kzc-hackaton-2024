@@ -28,14 +28,20 @@ DBUPHandler = DBUPHandling()
 def allPOIs():
     return DBPOIHandler.getAll()
 
-@app.get("/posts/{POIID}")
-def search(POIID):
+@app.get("/posts")
+def search(POIID: int):
     return DBPOIHandler.getPost(POIID)
 
-@app.post("/users/signup/{UID}")
-def createUser(UID):
-    DBUPHandler.addUser(UID)
+@app.post("/pin")
+def addnewpost(post: PostElement, pinID: int):
+    id = DBPostHandler.addEle(post)
+    DBPOIHandler.addPost(pinID, id)
 
-@app.post("/users/login/{UID}")
-def login(UID):
-    pass
+
+# @app.post("/users/signup/{UID}")
+# def createUser(UID):
+#     DBUPHandler.addUser(UID)
+
+# @app.post("/users/login/{UID}")
+# def login(UID):
+#     pass
