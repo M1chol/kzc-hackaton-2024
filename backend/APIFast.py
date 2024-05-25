@@ -28,8 +28,8 @@ DBUPHandler = DBUPHandling()
 def allPOIs():
     return DBPOIHandler.getAll()
 
-@app.get("/posts")
-def search(POIID: int):
+@app.get("/posts/{POIID}")
+def search(POIID):
     return DBPOIHandler.getPost(POIID)
 
 @app.post("/pin")
