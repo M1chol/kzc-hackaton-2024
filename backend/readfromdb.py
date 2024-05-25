@@ -44,6 +44,9 @@ class DBPostHandling():
                 last = ele['ID']
         return last
 
+
+
+#!ODZIELANIE POI OD POST
 class POIElement():
     def __init__(self) -> None:
         self.ID = 0
@@ -73,9 +76,14 @@ class DBPOIHandling():
 
     def addPost(self, PlaceID: int , PostID: int):
         database = Query()
-        last=self.db.search(database.ID == PlaceID)['posts']
-        last.append(PostID)
-        self.db.update({'posts': last}, database.ID == PlaceID)
+        place = self.db.get(database.ID == PlaceID)
+        if place is not None:
+            posts = place.get('posts', [])
+            posts.append(PostID)
+            self.db.update({'posts': posts}, database.ID == PlaceID)
+        else:
+            # Obsłuż sytuację, gdy PlaceID nie istnieje w bazie danych
+            print("PlaceID not found in database.")
 
     def __lastID(self) -> int:
         last = 0;
@@ -84,6 +92,8 @@ class DBPOIHandling():
                 last = ele['ID']
         return last
 
+    def getAll(self) -> list:
+        return self.db.all()
 if __name__ == '__main__':
     DBPostHandler = DBPostHandling()
     DBPOIHandler = DBPOIHandling()
@@ -101,6 +111,6 @@ if __name__ == '__main__':
     # DBPOIHandler._addEle(ele2)
     # ele2.ID = ele2.UpdateParam(x=10, y=31, name='Winda skrzydło któreś tam')
 
+    # DBPOIHandler.addPost(3, 1)
 
-
-    print(DBPostHandler.getAll())
+    print(DBPOIHandler.getAll())
