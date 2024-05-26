@@ -22,7 +22,7 @@
     </div>
     <div id="addpost">
         <button>
-            Dodaj Post <span>+</span>
+            <span>+</span>
         </button>
     </div>
 </template>
@@ -32,9 +32,12 @@
         if(state){
             document.getElementById("middlebar").style.display ="flex";
             document.getElementById("lowerbar").style.display ="none";
+            document.getElementById("addpost").style.display = "none";
         } else {
             document.getElementById("middlebar").style.display = "none";
             document.getElementById("lowerbar").style.display ="flex";
+            document.getElementById("addpost").style.display ="block";
+
         }
     }
 </script>
@@ -63,8 +66,8 @@ button {
     font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     font-size: .875rem;
     font-weight: 600;
-    line-height: 1.25rem;
-    padding: .25rem .75rem;
+    line-height: 1.75rem;
+    padding: .75rem 3rem;
     text-align: center;
     -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -93,7 +96,7 @@ button {
     }
 
     button span {
-        font-size: 20px;
+        font-size: 40px;
         padding: 0;
         margin: 0;
     }
