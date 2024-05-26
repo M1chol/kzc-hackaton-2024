@@ -29,7 +29,7 @@ const props = defineProps({
   pinId2: Number
 })
 let textVal = ref('')
-let newMessege = {pinID: props.pinId2, text: "", authorID: "Guest", iconID: 0}
+let newMessege = {pinID: props.pinId2, txt: "", authorID: "Guest", iconID: 0}
 
 function sendMessege() {
     newMessege.text = textVal.value
