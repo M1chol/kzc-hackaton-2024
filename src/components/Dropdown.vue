@@ -20,11 +20,7 @@
             </nav>
         </div>
     </div>
-    <div id="addpost">
-        <button @click="addPost">
-            <span>+</span>
-        </button>
-    </div>
+
 </template>
 
 <script setup>
@@ -69,49 +65,7 @@ export default {
     overflow: hidden;
 }
 
-button {
-    background-color: #76885B;
-    border: 1px solid rgb(209,213,219);
-    border-radius: .5rem;
-    color: #111827;
-    font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    font-size: .875rem;
-    font-weight: 600;
-    line-height: 1.75rem;
-    padding: .75rem 3rem;
-    padding-bottom: 0;
-    text-align: center;
-    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-user-select: none;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    }
 
-    button:hover {
-    background-color: #627254;
-    }
-
-    button:focus {
-    outline: 2px solid rgba(0,0,0,0.1);
-    outline-offset: 2px;
-    }
-
-    button:focus-visible {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    }
-
-    button span {
-        font-size: 40px;
-        padding: 0;
-        margin: 0;
-        color: white;
-    }
 
     #search {
         margin-top: 10px;
@@ -136,15 +90,6 @@ button {
       #search:hover {
         outline: 1px solid lightgrey;
       }
-
-#addpost {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    width: 130px;
-    height: 60px;
-    z-index: 1;
-}
 
 
 
