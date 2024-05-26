@@ -37,7 +37,9 @@ def allPOIs():
 
 @app.get("/fav/{UID}")
 def getFavorites(UID):
-    return DBUPHandler.getfavs(UID)
+    lista = DBUPHandler.getfavs(UID)
+    nowa_lista = [{"POSTID": id, "PostName": DBPOIHandler.getPointName(id)} for id in lista]
+    return nowa_lista
 
 @app.get("/pin/{POIID}")
 def allPOIs(POIID: int) -> str:
