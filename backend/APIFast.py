@@ -92,7 +92,7 @@ class UserInfo(BaseModel):
 
 class PostEle(BaseModel):
     pinID: int
-    text: str
+    txt: str
     authorID: str
     iconID: int
 
