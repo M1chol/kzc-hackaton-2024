@@ -3,6 +3,7 @@ from readfromdb import PostElement, POIElement, UPElement, DBPostHandling, DBPOI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import datetime
+import logging
 # import CiastkowyPotwor
 
 
@@ -35,11 +36,33 @@ DBINFOHandler = DBINFOHandling()
 def allPOIs():
     return DBPOIHandler.getAll()
 
+logging.basicConfig(level=logging.DEBUG)
+
 @app.get("/fav/{UID}")
-def getFavorites(UID):
-    lista = DBUPHandler.getfavs(UID)
-    nowa_lista = [{"POSTID": id, "PostName": DBPOIHandler.getPointName(id)} for id in lista]
-    return nowa_lista
+def get_favorites(UID: int):
+    logging.debug(f"Received request for UID: {UID}")
+    try:
+        lista = DBUPHandler.getfavs(UID)
+        logging.debug(f"getfavs returned: {lista}")
+        
+        if lista is None:
+            raise HTTPException(status_code=404, detail="User not found or no favorites")
+
+        nowa_lista = []
+        for id in lista:
+            post_name = DBPOIHandler.getPointName(id)
+            logging.debug(f"getPointName for ID {id} returned: {post_name}")
+            
+            if post_name is None:
+                raise HTTPException(status_code=404, detail=f"Post with ID {id} not found")
+            
+            nowa_lista.append({"POSTID": id, "PostName": post_name})
+
+        logging.debug(f"Returning: {nowa_lista}")
+        return nowa_lista
+    except Exception as e:
+        logging.error(f"Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/pin/{POIID}")
 def allPOIs(POIID: int) -> str:

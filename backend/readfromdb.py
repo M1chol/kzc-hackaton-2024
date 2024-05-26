@@ -168,7 +168,6 @@ class DBUPHandling():
     def getAll(self) -> list:
         return self.db.all()
 
-
 #!ODZIELENIE USERPLACES OD INFO
 
 class InfoElement(ElementType):
@@ -193,6 +192,7 @@ class DBINFOHandling():
             return znaleziony_element['info']
         else:
             return 'PLS HELP ME IM STUCK IN INFO PANEL'
+
 if __name__ == '__main__':
     DBPostHandler = DBPostHandling()
     DBPOIHandler = DBPOIHandling()
@@ -212,7 +212,11 @@ if __name__ == '__main__':
     # DBINFOHandler._addEle(ele)
 
     # print(DBINFOHandler.getinfo(3))
-    print(DBPostHandler.getEleByID(1))
+    # print(DBPostHandler.getEleByID(1))
+    lista = DBUPHandler.getfavs(1)
+    nowa_lista = [{"POSTID": id, "PostName": DBPOIHandler.getPointName(id)} for id in lista]
+    print(nowa_lista)
+
 
     # ele2 = POIElement()
     # ele2.ID = ele2.UpdateParam(x=13, y=14, name='Hinczyk')
