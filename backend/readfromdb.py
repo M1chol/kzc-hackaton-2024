@@ -2,10 +2,10 @@ from tinydb import TinyDB, Query
 import datetime
 import random
 
-DB_POSTS_LINK = r'backend\databases\posts.json'
-DB_P_O_I_LINK = r'backend\databases\pointsofintrest.json'
-DB_UP_LINK = r"backend\databases\userfav.json"
-DB_INFO_LINK = r"backend\databases\info.json"
+DB_POSTS_LINK = r'./backend/databases/posts.json'
+DB_P_O_I_LINK = r'./backend/databases/pointsofintrest.json'
+DB_UP_LINK = r"./backend/databases/userfav.json"
+DB_INFO_LINK = r"./backend/databases/info.json"
 #https://www.youtube.com/watch?v=xYG89rB6c5k
 
 #TODO Error handling
