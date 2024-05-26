@@ -70,9 +70,14 @@ def allPOIs(POIID: int) -> str:
 
 @app.get("/posts/{POIID}")
 def search(POIID: int):
-    posts = DBPOIHandler.getPost(POIID)
-    wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts if dict(DBPostHandler.getEleByID(ID))['experimentationDate'] > dict(DBPostHandler.getEleByID(ID))['date']]
-    return wszystkie_wyniki
+    try:
+        posts = DBPOIHandler.getPost(POIID)
+        wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts if dict(DBPostHandler.getEleByID(ID))['experimentationDate'] > dict(DBPostHandler.getEleByID(ID))['date']]
+        return wszystkie_wyniki
+    except KeyError:
+        raise HTTPException(status_code=500, detail="Błąd przetwarzania danych - brak klucza w słowniku")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 class UserInfo(BaseModel):
     UID: int
