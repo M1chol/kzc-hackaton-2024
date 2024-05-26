@@ -1,13 +1,26 @@
+<script setup>
+import { favs } from '../main.js'
+</script>
 <template>
-    <div class="favourite">
-        test
-    </div>
+    <!-- <div v-for="item in favs" class="favourite" :key="item.ID">
+        {{ item }}
+    </div> -->
+    <div class="favourite">test1</div>
+    <div class="favourite">test2</div>
+    <div class="favourite">test3</div>
+
 </template>
 
 
 <style scoped>
-    span {
-        margin-left: 5px;
-        margin-right: 5px;
+    .favourite {
+        box-shadow: 0px 10px 20px -18px;
+        background-color: #EEEEEE;
+        width: 100px;
+        height: 50px;
+        border-radius: 20px;
+        text-align: center;
+        line-height: 50px;
+        font-weight: bold;
     }
 </style>

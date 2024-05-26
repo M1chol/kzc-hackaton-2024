@@ -3,7 +3,9 @@
         <div id="wrapper2">
             <nav>
                 <div id="upperBar">
-                    <div id="search"></div>
+                    <div id="searchbar">
+                        <input id="search" name="text" placeholder="Search..." type="search">
+                    </div>
                     <div id="logo">WAT CONNECT</div>
                     <div id="menubutton">
                         <MenuButton @toggleMenu="(state) => handleToggleMenu(state)"></MenuButton>
@@ -13,9 +15,7 @@
                     <Menu></Menu>
                 </div>
                 <div id="lowerbar">
-                    <div id="favourites">
-                        <Favourite></Favourite>
-                    </div>
+                    <Favourite></Favourite>
                 </div>
             </nav>
         </div>
@@ -57,6 +57,13 @@ export default {
 </script>
 
 <style scoped>
+
+#logo {
+    line-height: 60px;
+    margin-left: 20px;
+    font-size: 20px;
+    overflow: hidden;
+}
 
 button {
     background-color: #76885B;
@@ -100,6 +107,31 @@ button {
         padding: 0;
         margin: 0;
     }
+
+    #search {
+        margin-top: 10px;
+        margin-left: 10px;
+        max-width: 150px;
+        background-color: #f5f5f5;
+        color: #627254;
+        padding: .15rem .5rem;
+        min-height: 40px;
+        border-radius: 15px;
+        outline: none;
+        border: none;
+        line-height: 1.15;
+        box-shadow: 0px 10px 20px -18px;
+      }
+      
+      #search:focus {
+        border-bottom: 2px solid #627254;
+        border-radius: 15px;
+      }
+      
+      #search:hover {
+        outline: 1px solid lightgrey;
+      }
+
 #addpost {
     position: absolute;
     bottom: 5px;
@@ -108,6 +140,8 @@ button {
     height: 60px;
     z-index: 1;
 }
+
+
 
 #middlebar {
     display: none;
@@ -139,7 +173,7 @@ nav {
     border-radius: 20px;
 }
 
-#search {
+#searchbar {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 100px;
