@@ -200,7 +200,7 @@ if __name__ == '__main__':
     DBINFOHandler = DBINFOHandling()
     # DBUPHandler.addUser(1)
     ele = InfoElement()
-    ele.UpdateParam(PINID=52,  info='zydshop')
+    ele.UpdateParam(PINID=12,  info='Można tu kupić napoje oraz zimne przekąski. WAT Connect poleca kanapki z kurczakiem')
     DBINFOHandler._addEle(ele)
 
     # DBPOIHandler.addPost(1,1)
