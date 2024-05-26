@@ -2,6 +2,7 @@
 import { CustomMarker, GoogleMap, InfoWindow } from 'vue3-google-map'
 import { pins } from '../main.js'
 import Popup from './Popup.vue'
+import { ip_const } from './hostip.js';
 const center = { lat: 52.254205, lng: 20.903159 }
 let activePopups = []
 let pinPosts = []
