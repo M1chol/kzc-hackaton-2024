@@ -8,11 +8,10 @@ let pinPosts = []
 let popupContent = ""
 
 const handlePinClick = (pin) => {
-  console.log("Marker clicked", pin)
   activePopups[0]=pin
+  console.log("Marker clicked", pin)
   fetch(`http://127.0.0.1:8000/pin/${pin.ID}`).then(res => res.text()).then(res => popupContent = res)
   fetch(`http://127.0.0.1:8000/posts/${pin.ID}`).then(res => res.json()).then(res => pinPosts = res)
-  state => toggleNewPostButton(state)
   console.log(pinPosts)
   console.log(activePopups)
 }
@@ -33,7 +32,7 @@ const lookupIcon = [
         console.log("showing button")
           document.getElementById("addpost").style.display ="block";
       }
-  }
+}
 </script>
 
 <template>
@@ -52,7 +51,7 @@ const lookupIcon = [
     <span v-for="pin in pins" :key="pin.ID">
       <CustomMarker 
         :options="{ position: { lat: pin.x, lng: pin.y } }"
-        @click="() => handlePinClick(pin)"
+        @click="handlePinClick(pin)"
       >
         <img v-bind:src="lookupIcon[pin.iconID]" style="width:27px;height:27px;" />
       </CustomMarker>
