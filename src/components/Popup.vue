@@ -9,6 +9,14 @@
                 <h2>Rozkład jazdy</h2>
                 Najbliższy tramwaj za 20 minut
               </span>
+              <span v-if="post.iconID == 2">
+                <h2>Menu</h2>
+                <a href="#">http://barchinczyk.pl/dania-glowne/</a>
+              </span>
+              <span v-if="post.iconID == 3">
+                <h2>Rozkład jazdy</h2>
+                <span style="color:red; font-size: medium;">Autobus właśnie odjechał</span>
+              </span>
             </li>
           <hr>
           <h2 id="PostsElem">Posty:</h2>

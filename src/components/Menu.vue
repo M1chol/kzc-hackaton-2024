@@ -1,8 +1,8 @@
 <template>
     <div id="menu">
         <div id="profile">
-            <img src="../assets/pp_placeholder.jpg" id="pp">
-            <p>Witaj, Admin</p>
+            <img src="../assets/pp_placeholder.png" id="pp">
+            <p>Witaj, John</p>
         </div>
         <div id="schedule" class="option">Plan Lekcji</div>
         <div id="calculator" class="option">Kalkulator Sredniej</div>

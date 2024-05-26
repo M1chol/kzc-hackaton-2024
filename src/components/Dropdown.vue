@@ -60,7 +60,7 @@ export default {
 
 #logo {
     line-height: 60px;
-    margin-left: 20px;
+    margin-left: 10px;
     font-size: 20px;
     overflow: hidden;
 }
@@ -136,7 +136,7 @@ nav {
     justify-content: right;
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 100px;
+    flex-basis: 50px;
     padding-right: 10px;
     padding-top: 5px;
 }
