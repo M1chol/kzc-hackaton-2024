@@ -1,7 +1,7 @@
 <template>
     <div id="menu">
         <div id="profile">
-            <img src="../assets/pp_placeholder.jpg" id="pp">
+            <img src="../assets/pp_placeholder.jpg" id="pp" @click="() => logIn()">
         </div>
         <div id="schedule" class="option">Plan Lekcji</div>
         <div id="calculator" class="option">Kalkulator Sredniej</div>
@@ -10,6 +10,10 @@
 </template>
 
 <script setup>
+const emit = defineEmits(['logIn']);
+const logIn = () => {
+  emit('logIn');
+}
 </script>
 
 <style>

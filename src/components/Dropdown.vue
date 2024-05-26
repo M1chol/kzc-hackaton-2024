@@ -12,7 +12,8 @@
                     </div>
                 </div>
                 <div id="middlebar">
-                    <Menu></Menu>
+                    <Menu v-show="!isLogging" @logIn="() => loadLogIn()"></Menu>
+                    <LogIn v-show="isLogging"></LogIn>
                 </div>
                 <div id="lowerbar">
                     <Favourite></Favourite>
@@ -28,28 +29,32 @@
 </template>
 
 <script setup>
-function addPost() {
-        
-    }
+var isLogging = ref(false);
+const loadLogIn = () => {
+    isLogging = true;
+    console.log(isLogging);
+}
 
-    const handleToggleMenu = (state) => {
-        if(state){
-            document.getElementById("middlebar").style.display ="flex";
-            document.getElementById("lowerbar").style.display ="none";
-            document.getElementById("addpost").style.display = "none";
-        } else {
-            document.getElementById("middlebar").style.display = "none";
-            document.getElementById("lowerbar").style.display ="flex";
-            document.getElementById("addpost").style.display ="block";
+const handleToggleMenu = (state) => {
+    if(state){
+        document.getElementById("middlebar").style.display ="flex";
+        document.getElementById("lowerbar").style.display ="none";
+        document.getElementById("addpost").style.display = "none";
+    } else {
+        document.getElementById("middlebar").style.display = "none";
+        document.getElementById("lowerbar").style.display ="flex";
+        document.getElementById("addpost").style.display ="block";
 
-        }
     }
+}
 </script>
 
 <script>
 import MenuButton from './MenuButton.vue'
 import Menu from './Menu.vue'
 import Favourite from './Favourites.vue'
+import LogIn from './LogIn.vue'
+import { ref } from 'vue'
 
 export default {
     name: 'Dropdown',
