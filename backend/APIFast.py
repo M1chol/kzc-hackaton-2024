@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends, status
-from readfromdb import DBPostHandling, DBPOIHandling, DBUPHandling, DBINFOHandling
+from readfromdb import DBPostHandling, DBPOIHandling, DBUPHandling, DBINFOHandling, PostElement
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import logging
@@ -8,7 +8,7 @@ from passlib.context import CryptContext
 from typing import Optional
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
-
+import datetime
 
 #TODO add user handling module
 
@@ -99,6 +99,8 @@ class PostEle(BaseModel):
 @app.post("/addnewpost")
 def addnewpost(post: PostEle):
     try:
+        npost = PostElement()
+        npost.UpdateParam(txt = post.txt, authorID = post.authorID, iconID = post.iconID)
         id = DBPostHandler.addEle(post)
         DBPOIHandler.addPost(post.pinID, id)
         return {'id': id}
