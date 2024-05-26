@@ -21,13 +21,17 @@
         </div>
     </div>
     <div id="addpost">
-        <button>
+        <button @click="addPost">
             <span>+</span>
         </button>
     </div>
 </template>
 
 <script setup>
+function addPost() {
+        
+    }
+
     const handleToggleMenu = (state) => {
         if(state){
             document.getElementById("middlebar").style.display ="flex";

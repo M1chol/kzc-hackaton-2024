@@ -6,12 +6,13 @@ const center = { lat: 52.254205, lng: 20.903159 }
 let activePopups = []
 let pinPosts = []
 let popupContent = ""
+
 const handlePinClick = (pin) => {
   console.log("Marker clicked", pin)
-  activePopups = []
-  activePopups.push(pin)
+  activePopups[0]=pin
   fetch(`http://127.0.0.1:8000/pin/${pin.ID}`).then(res => res.text()).then(res => popupContent = res)
   fetch(`http://127.0.0.1:8000/posts/${pin.ID}`).then(res => res.json()).then(res => pinPosts = res)
+  state => toggleNewPostButton(state)
   console.log(pinPosts)
   console.log(activePopups)
 }
@@ -24,6 +25,15 @@ const lookupIcon = [
   "/Ikonka_uczelnia.png",
   "/Ikonka_wip.png"
 ]
+  const toggleNewPostButton = (state) => {
+    if (state) {
+        console.log("hiding button")
+          document.getElementById("addpost").style.display = "none";
+    } else {
+        console.log("showing button")
+          document.getElementById("addpost").style.display ="block";
+      }
+  }
 </script>
 
 <template>
@@ -48,7 +58,7 @@ const lookupIcon = [
       </CustomMarker>
     </span>
     <span v-for="popup in activePopups" :key="popup.ID">
-        <InfoWindow :options="{ position: { lat: popup.x, lng: popup.y } }"> <Popup :title="popup.name" :content="popupContent" :posts="pinPosts"/> </InfoWindow>
+        <InfoWindow :options="{ position: { lat: popup.x, lng: popup.y } }"> <Popup :title="popup.name" :content="popupContent" :posts="pinPosts" :pinId2="popup.ID"/> </InfoWindow>
     </span>
   </GoogleMap>
 </template>
