@@ -1,5 +1,6 @@
 from tinydb import TinyDB, Query
 import datetime
+import random
 
 DB_POSTS_LINK = r'backend\databases\posts.json'
 DB_P_O_I_LINK = r'backend\databases\pointsofintrest.json'
@@ -24,7 +25,12 @@ class PostElement(ElementType):
         self.txt = ''
         self.authorID = authorID;
         self.date = str(datetime.datetime.now())
-        self.experimentationDate = str(datetime.datetime.now())
+        random_hours = random.randint(0, 23)
+        random_minutes = random.randint(0, 59)
+        random_seconds = random.randint(0, 59)
+        random_time_delta = datetime.timedelta(hours=random_hours, minutes=random_minutes, seconds=random_seconds)
+
+        self.experimentationDate = str(random_time_delta+datetime.datetime.now())
         self.iconID = 0
         self.like = 0
         super().__init__()
