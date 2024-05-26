@@ -32,7 +32,7 @@ let textVal = ref('')
 let newMessege = {pinID: props.pinId2, txt: "", authorID: "Guest", iconID: 0}
 
 function sendMessege() {
-    newMessege.text = textVal.value
+    newMessege.txt = textVal.value
     fetch(`http://127.0.0.1:8000/addnewpost`, {
     method: 'POST', // HTTP method
     headers: {
