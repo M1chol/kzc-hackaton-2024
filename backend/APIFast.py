@@ -101,7 +101,7 @@ def addnewpost(post: PostEle):
     try:
         npost = PostElement()
         npost.UpdateParam(txt = post.txt, authorID = post.authorID, iconID = post.iconID)
-        id = DBPostHandler.addEle(post)
+        id = DBPostHandler.addEle(npost)
         DBPOIHandler.addPost(post.pinID, id)
         return {'id': id}
     except Exception as e:
