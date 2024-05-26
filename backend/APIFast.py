@@ -99,8 +99,8 @@ class PostEle(BaseModel):
 @app.post("/addnewpost")
 def addnewpost(post: PostEle):
     try:
-        npost = PostElement()
-        npost.UpdateParam(txt = post.txt, authorID = post.authorID, iconID = post.iconID)
+        npost = PostElement(post.authorID)
+        npost.UpdateParam(txt = post.txt, iconID = post.iconID)
         id = DBPostHandler.addEle(npost)
         DBPOIHandler.addPost(post.pinID, id)
         return {'id': id}
