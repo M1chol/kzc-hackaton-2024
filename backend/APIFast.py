@@ -37,7 +37,9 @@ def allPOIs():
 
 @app.get("/fav/{UID}")
 def getFavorites(UID):
-    return DBUPHandler.getfavs(UID)
+    lista = DBUPHandler.getfavs(UID)
+    nowa_lista = [{"POSTID": id, "PostName": DBPOIHandler.getPointName(id)} for id in lista]
+    return nowa_lista
 
 @app.get("/pin/{POIID}")
 def allPOIs(POIID: int) -> str:
@@ -46,7 +48,6 @@ def allPOIs(POIID: int) -> str:
 @app.get("/posts/{POIID}")
 def search(POIID: int):
     posts = DBPOIHandler.getPost(POIID)
-    print(posts)
     wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts if dict(DBPostHandler.getEleByID(ID))['experimentationDate'] > dict(DBPostHandler.getEleByID(ID))['date']]
     return wszystkie_wyniki
 

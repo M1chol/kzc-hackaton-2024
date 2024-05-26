@@ -109,7 +109,15 @@ class DBPOIHandling():
             return posts
         else:
             return [0]
-        
+    
+    def getPointName(self, PointID: int) -> str:
+        database = Query()
+        place = self.db.get(database.ID == PointID)
+        if place is not None:
+            posts = place.get('name', [])
+            return posts
+        else:
+            return [0]
 #!ODZIELENIE POI OD USERPlACES
 class UPElement(ElementType):
     def __init__(self, authorID: str) -> None:
@@ -203,7 +211,8 @@ if __name__ == '__main__':
     # ele.UpdateParam(PINID = 1, info = "teiwuhgtyuewsgwye")
     # DBINFOHandler._addEle(ele)
 
-    print(DBINFOHandler.getinfo(3))
+    # print(DBINFOHandler.getinfo(3))
+    print(DBPostHandler.getEleByID(1))
 
     # ele2 = POIElement()
     # ele2.ID = ele2.UpdateParam(x=13, y=14, name='Hinczyk')
