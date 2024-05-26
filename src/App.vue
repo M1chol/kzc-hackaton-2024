@@ -35,6 +35,7 @@ export default {
 
 * {
   margin: 0;
+  font-family: 'Courier New', Courier, monospace;
 }
 #app {
   height: 100vh;
