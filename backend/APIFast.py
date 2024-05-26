@@ -66,7 +66,13 @@ def get_favorites(UID: int):
 
 @app.get("/pin/{POIID}")
 def allPOIs(POIID: int) -> str:
-    return DBINFOHandler.getinfo(POIID)
+    try:
+        info = DBINFOHandler.getinfo(POIID)
+        return info
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Nie znaleziono informacji dla podanego POIID")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/posts/{POIID}")
 def search(POIID: int):
