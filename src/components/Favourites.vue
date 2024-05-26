@@ -10,13 +10,17 @@ import { favs } from '../main.js'
 
 <style scoped>
     .favourite {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
         box-shadow: 0px 10px 20px -18px;
         background-color: #EEEEEE;
-        width: 33%;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 25%;
         height: 50px;
         border-radius: 20px;
         text-align: center;
         line-height: 50px;
-        font-weight: bold;
     }
 </style>
