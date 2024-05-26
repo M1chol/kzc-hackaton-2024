@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.21"
+    "@fawmi/vue-google-maps": "^0.9.79",
+    "vue": "^3.4.21",
+    "vue3-google-map": "^0.20.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

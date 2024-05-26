@@ -1,0 +1,1 @@
+export const ip_const = "192.168.31.221"
