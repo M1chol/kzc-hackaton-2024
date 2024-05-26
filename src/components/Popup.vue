@@ -33,22 +33,21 @@ let newMessege = {pinID: props.pinId2, txt: "", authorID: "Guest", iconID: 0}
 
 function sendMessege() {
     newMessege.txt = textVal.value
-    fetch(`http://127.0.0.1:8000/addnewpost`, {
+  fetch(`http://127.0.0.1:8000/addnewpost`, {
     method: 'POST', // HTTP method
     headers: {
       'Content-Type': 'application/json' // Indicate the request body format
     },
-      body: JSON.stringify(newMessege) // Convert the data object to a JSON string
-    
+    body: JSON.stringify(newMessege) // Convert the data object to a JSON string
+
   })
-  .then(response => response.json()) // Parse the JSON from the response
-  .then(data => {
-    console.log('Success:', data); // Handle the success response
-  })
-  .catch((error) => {
-    console.error('Error:', error); // Handle any errors
-  });
-  textVal = ''
+    .then(response => response.json()) // Parse the JSON from the response
+    .then(data => {
+      console.log('Success:', data); // Handle the success response
+    })
+    .catch((error) => {
+      console.error('Error:', error); // Handle any errors
+    }).then(textVal = '');
 }
 
 </script>

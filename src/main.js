@@ -10,23 +10,26 @@ async function fetchData() {
             `http://127.0.0.1:8000/pins`
         );
         pins.value = await res1.json();
-        
+
         console.log(pins.value)
     } catch (error) {
         console.error('Error fetching pins or favs data:', error);
     }
 }
-try {
-    const res2 = await fetch(
-        `http://127.0.0.1:8000/fav/1`
-    );
-    favs.value = await res2.json();
-} catch (error) {
-    console.error('Error fetching pins or favs data:', error);
+async function dupa() {
+    try {
+        const res2 = await fetch(
+            `http://127.0.0.1:8000/fav/1`
+        );
+        favs.value = await res2.json().then(console.log(favs));
+    } catch (error) {
+        console.error('Error fetching pins or favs data:', error);
+    }
 }
-
 // Initial fetch
 fetchData();
+dupa();
+
 
 // Fetch data at intervals
 setInterval(fetchData, 2000); // Fetch data every 5 seconds (adjust as needed)
