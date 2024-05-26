@@ -35,6 +35,10 @@ DBINFOHandler = DBINFOHandling()
 def allPOIs():
     return DBPOIHandler.getAll()
 
+@app.get("/fav/{UID}")
+def getFavorites(UID):
+    return DBUPHandler.getfavs(UID)
+
 @app.get("/pin/{POIID}")
 def allPOIs(POIID: int) -> str:
     return DBINFOHandler.getinfo(POIID)
