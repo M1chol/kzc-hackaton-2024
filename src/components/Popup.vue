@@ -4,6 +4,7 @@
           <div id="bodyContent">
             {{ content }}
           </div>
+          <hr>
           <h2 id="PostsElem">Posty:</h2>
           <ul>
             <li>
@@ -53,5 +54,8 @@ function sendMessege() {
 </script>
 
 <style scoped>
-
+  hr {
+    margin-top: 10px;
+    margin-top: 10px;
+  }
 </style>

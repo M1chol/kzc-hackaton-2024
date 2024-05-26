@@ -6,7 +6,7 @@
                     <div id="searchbar">
                         <input id="search" name="text" placeholder="Search..." type="search">
                     </div>
-                    <div id="logo">WAT CONNECT</div>
+                    <div id="logo"><b>WAT CONNECT</b></div>
                     <div id="menubutton">
                         <MenuButton @toggleMenu="(state) => handleToggleMenu(state)"></MenuButton>
                     </div>
@@ -79,6 +79,7 @@ button {
     font-weight: 600;
     line-height: 1.75rem;
     padding: .75rem 3rem;
+    padding-bottom: 0;
     text-align: center;
     -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -89,7 +90,6 @@ button {
     -webkit-user-select: none;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
-    color: white;
     }
 
     button:hover {
@@ -110,6 +110,7 @@ button {
         font-size: 40px;
         padding: 0;
         margin: 0;
+        color: white;
     }
 
     #search {
