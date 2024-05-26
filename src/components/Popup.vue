@@ -4,6 +4,12 @@
           <div id="bodyContent">
             {{ content }}
           </div>
+              <li v-for="post in posts" :key="post.ID">
+              <span v-if="post.iconID == 1">
+                <h2>Rozkład jazdy</h2>
+                Najbliższy tramwaj za 20 minut
+              </span>
+            </li>
           <hr>
           <h2 id="PostsElem">Posty:</h2>
           <ul>

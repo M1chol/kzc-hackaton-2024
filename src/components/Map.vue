@@ -24,14 +24,8 @@ const lookupIcon = [
   "/Ikonka_uczelnia.png",
   "/Ikonka_wip.png"
 ]
-  const toggleNewPostButton = (state) => {
-    if (state) {
-        console.log("hiding button")
-          document.getElementById("addpost").style.display = "none";
-    } else {
-        console.log("showing button")
-          document.getElementById("addpost").style.display ="block";
-      }
+function dupa() {
+  activePopups = []
 }
 </script>
 
@@ -57,7 +51,7 @@ const lookupIcon = [
       </CustomMarker>
     </span>
     <span v-for="popup in activePopups" :key="popup.ID">
-        <InfoWindow :options="{ position: { lat: popup.x, lng: popup.y } }"> <Popup :title="popup.name" :content="popupContent" :posts="pinPosts" :pinId2="popup.ID"/> </InfoWindow>
+        <InfoWindow @closeclick="dupa" :options="{ position: { lat: popup.x, lng: popup.y } }"> <Popup :title="popup.name" :content="popupContent" :posts="pinPosts" :pinId2="popup.ID"/> </InfoWindow>
     </span>
   </GoogleMap>
 </template>
