@@ -4,12 +4,15 @@ import { pins } from '../main.js'
 import Popup from './Popup.vue'
 const center = { lat: 52.254205, lng: 20.903159 }
 let activePopups = []
-let popupId = 0
+let pinPosts = []
 let popupContent = ""
 const handlePinClick = (pin) => {
   console.log("Marker clicked", pin)
-  activePopups.push({ ID: popupId++, x: pin.x, y: pin.y, text: pin.name })
+  activePopups = []
+  activePopups.push(pin)
   fetch(`http://127.0.0.1:8000/pin/${pin.ID}`).then(res => res.text()).then(res => popupContent = res)
+  fetch(`http://127.0.0.1:8000/posts/${pin.ID}`).then(res => res.json()).then(res => pinPosts = res)
+  console.log(pinPosts)
   console.log(activePopups)
 }
 const lookupIcon = [
@@ -41,11 +44,11 @@ const lookupIcon = [
         :options="{ position: { lat: pin.x, lng: pin.y } }"
         @click="() => handlePinClick(pin)"
       >
-        <img v-bind:src="lookupIcon[pin.iconID]" style="width:25px;height:25px;" />
+        <img v-bind:src="lookupIcon[pin.iconID]" style="width:27px;height:27px;" />
       </CustomMarker>
     </span>
     <span v-for="popup in activePopups" :key="popup.ID">
-        <InfoWindow :options="{ position: { lat: popup.x, lng: popup.y } }"> <Popup :title="popup.text" :content="popupContent"/> </InfoWindow>
+        <InfoWindow :options="{ position: { lat: popup.x, lng: popup.y } }"> <Popup :title="popup.name" :content="popupContent" :posts="pinPosts"/> </InfoWindow>
     </span>
   </GoogleMap>
 </template>
