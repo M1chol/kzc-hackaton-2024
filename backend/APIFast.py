@@ -96,7 +96,7 @@ class PostEle(BaseModel):
     authorID: str
     iconID: int
 
-@app.post("/pins")
+@app.post("/addnewpost")
 def addnewpost(post: PostEle):
     try:
         id = DBPostHandler.addEle(post)
