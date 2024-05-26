@@ -1,2 +1,6 @@
 tinydb
 fastapi
+passlib
+jose
+python-jose
+bcrypt

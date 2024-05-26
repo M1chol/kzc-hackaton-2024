@@ -90,11 +90,6 @@ def search(POIID: int):
 class UserInfo(BaseModel):
     UID: int
 
-@app.post("/users/login")
-def login(UserInfo):
-    pass
-
-
 class PostEle(BaseModel):
     pinID: int
     text: str
@@ -119,8 +114,6 @@ SECRET_KEY = "secretkey"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-app = FastAPI()
-
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -128,15 +121,18 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 class User(BaseModel):
     username: str
     hashed_password: str
+    UID: int  # Dodajemy pole UID
 
 fake_users_db = {
     "admin": {
         "username": "admin",
         "hashed_password": pwd_context.hash("admin"),
+        "UID": 1
     },
-        "user": {
+    "user": {
         "username": "user",
         "hashed_password": pwd_context.hash("user"),
+        "UID": 2
     }
 }
 
@@ -183,7 +179,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": user.username, "UID": user.UID}, expires_delta=access_token_expires  # Dodajemy UID do danych w tokenie
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
@@ -197,11 +193,38 @@ async def read_users_me(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
-        if username is None:
+        UID: int = payload.get("UID")  # Pobieramy UID z tokena
+        if username is None or UID is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
     user = get_user(fake_users_db, username=username)
-    if user is None:
+    if user is None or user.UID != UID:
         raise credentials_exception
+
+    # Dodajemy kod do obsługi żądania pobierającego ulubione elementy użytkownika
+    logging.debug(f"Received request for UID: {UID}")
+    try:
+        lista = DBUPHandler.getfavs(UID)
+        logging.debug(f"getfavs returned: {lista}")
+
+        if lista is None:
+            raise HTTPException(status_code=404, detail="User not found or no favorites")
+
+        nowa_lista = []
+        for id in lista:
+            post_name = DBPOIHandler.getPointName(id)
+            logging.debug(f"getPointName for ID {id} returned: {post_name}")
+
+            if post_name is None:
+                raise HTTPException(status_code=404, detail=f"Post with ID {id} not found")
+
+            nowa_lista.append({"POSTID": id, "PostName": post_name})
+
+        logging.debug(f"Returning: {nowa_lista}")
+        return nowa_lista
+    except Exception as e:
+        logging.error(f"Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
     return user
