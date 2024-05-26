@@ -199,9 +199,9 @@ if __name__ == '__main__':
     DBUPHandler = DBUPHandling()
     DBINFOHandler = DBINFOHandling()
     # DBUPHandler.addUser(1)
-    # ele = POIElement()
-    # ele.UpdateParam(x=52.251782138860044,  y= 20.89641379302408, name='zydshop')
-    # DBPOIHandler._addEle(ele)
+    ele = InfoElement()
+    ele.UpdateParam(PINID=52,  info='zydshop')
+    DBINFOHandler._addEle(ele)
 
     # DBPOIHandler.addPost(1,1)
     # print(DBPOIHandler.getPost(1))
@@ -213,9 +213,9 @@ if __name__ == '__main__':
 
     # print(DBINFOHandler.getinfo(3))
     # print(DBPostHandler.getEleByID(1))
-    lista = DBUPHandler.getfavs(1)
-    nowa_lista = [{"POSTID": id, "PostName": DBPOIHandler.getPointName(id)} for id in lista]
-    print(nowa_lista)
+    # lista = DBUPHandler.getfavs(1)
+    # nowa_lista = [{"POSTID": id, "PostName": DBPOIHandler.getPointName(id)} for id in lista]
+    # print(nowa_lista)
 
 
     # ele2 = POIElement()
