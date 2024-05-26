@@ -21,6 +21,12 @@
                 <span>+</span>
               </button>
             </div>
+            <input type="checkbox" id="star">
+            <label for="star">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+              </svg>
+            </label>
           </form>
         </div>
 </template>
@@ -165,4 +171,40 @@ li {
       margin: 0;
       color: white;
     }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+    
+    label svg {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      width: 30px;
+      height: 30px;
+      fill: none;
+      stroke: #000;
+      stroke-width: 1px;
+    }
+    
+    input[type="checkbox"]:checked + label svg {
+      fill: #FFC107;
+      animation: pop_42 0.5s ease-out;
+    }
+    
+    @keyframes pop_42 {
+      0% {
+        transform: scale(1);
+      }
+    
+      50% {
+        transform: scale(1.5);
+      }
+    
+      100% {
+        transform: scale(1);
+      }
+    }
+
+
 </style>
