@@ -1,6 +1,6 @@
 <template>
     <div id="content">
-          <h1 id="firstHeading" class="firstHeading">{{ title }}</h1>
+          <h1 id="firstHeading" class="firstHeading">{{ title || "no title" }}</h1>
           <div id="bodyContent">
             {{ content }}
           </div>
