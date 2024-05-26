@@ -2,6 +2,7 @@
 import { CustomMarker, GoogleMap, InfoWindow } from 'vue3-google-map'
 import { pins } from '../main.js'
 import Popup from './Popup.vue'
+import { ip_const } from './hostip.js';
 const center = { lat: 52.254205, lng: 20.903159 }
 let activePopups = []
 let pinPosts = []
@@ -10,8 +11,8 @@ let popupContent = ""
 const handlePinClick = (pin) => {
   activePopups[0]=pin
   console.log("Marker clicked", pin)
-  fetch(`http://127.0.0.1:8000/pin/${pin.ID}`).then(res => res.text()).then(res => popupContent = res)
-  fetch(`http://127.0.0.1:8000/posts/${pin.ID}`).then(res => res.json()).then(res => pinPosts = res)
+  fetch(`http://${ip_const}:8000/pin/${pin.ID}`).then(res => res.text()).then(res => popupContent = res)
+  fetch(`http://${ip_const}:8000/posts/${pin.ID}`).then(res => res.json()).then(res => pinPosts = res)
   console.log(pinPosts)
   console.log(activePopups)
 }

@@ -27,6 +27,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { ip_const } from './hostip';
 const props = defineProps({
   title: String,
   content: String,
@@ -38,7 +39,7 @@ let newMessege = {pinID: props.pinId2, txt: "", authorID: "Guest", iconID: 0}
 
 function sendMessege() {
     newMessege.txt = textVal.value
-  fetch(`http://127.0.0.1:8000/addnewpost`, {
+  fetch(`http://${ip_const}:8000/addnewpost`, {
     method: 'POST', // HTTP method
     headers: {
       'Content-Type': 'application/json' // Indicate the request body format
