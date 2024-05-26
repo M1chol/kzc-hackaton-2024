@@ -211,7 +211,8 @@ if __name__ == '__main__':
     # ele.UpdateParam(PINID = 1, info = "teiwuhgtyuewsgwye")
     # DBINFOHandler._addEle(ele)
 
-    print(DBINFOHandler.getinfo(3))
+    # print(DBINFOHandler.getinfo(3))
+    print(DBPostHandler.getEleByID(1))
 
     # ele2 = POIElement()
     # ele2.ID = ele2.UpdateParam(x=13, y=14, name='Hinczyk')

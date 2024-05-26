@@ -48,7 +48,6 @@ def allPOIs(POIID: int) -> str:
 @app.get("/posts/{POIID}")
 def search(POIID: int):
     posts = DBPOIHandler.getPost(POIID)
-    print(posts)
     wszystkie_wyniki=[DBPostHandler.getEleByID(ID) for ID in posts if dict(DBPostHandler.getEleByID(ID))['experimentationDate'] > dict(DBPostHandler.getEleByID(ID))['date']]
     return wszystkie_wyniki
 
